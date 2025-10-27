@@ -1,0 +1,24 @@
+<div class="card">
+  <div style="margin-bottom:1rem">
+    <%= link_to '← Voltar para notícias', feed_items_path, class: 'btn btn-ghost' %>
+  </div>
+  
+  <h2><%= @feed_item.title %></h2>
+  <div class="muted small" style="margin-bottom:0.75rem">
+    <span>Publicado em <%= @feed_item.published_at %></span>
+    <% if @feed_item.feed %>
+      · <span>Fonte: <%= link_to @feed_item.feed.name, feed_path(@feed_item.feed), class: 'muted' %></span>
+    <% end %>
+  </div>
+
+  <article class="feed-content">
+    <%= format_feed_content(@feed_item.content) %>
+  </article>
+
+  <div style="margin-top:1rem;display:flex;gap:0.5rem">
+    <%= link_to 'Visitar fonte', @feed_item.url, class: 'btn', target: '_blank', rel: 'noopener' %>
+    <% unless @feed_item.read %>
+      <%= button_to 'Marcar como lido', mark_as_read_feed_item_path(@feed_item), method: :post, class: 'btn btn-ghost' %>
+    <% end %>
+  </div>
+</div>

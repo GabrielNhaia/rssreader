@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Rssreader" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="app-bg text-main">
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <h1 class="app-title"><a href="/">Rssreader</a></h1>
+        <nav class="top-actions">
+          <a href="/feeds" class="btn btn-ghost">Feeds</a>
+          <a href="/feeds/new" class="btn">+ Novo</a>
+          <a href="#" id="refresh-all" data-url="/feeds/refresh" class="btn btn-ghost">Atualizar</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container main-grid">
+      <aside class="sidebar" id="sidebar">
+        <section class="sidebar-section">
+          <h3>Categorias</h3>
+          <ul id="categories">
+            <% if defined?(@categories) && @categories.present? %>
+              <% @categories.each do |c| %>
+                <li><a href="/feeds?category=<%= CGI.escape(c.to_s) %>"><%= c.presence || 'Sem categoria' %></a></li>
+              <% end %>
+            <% else %>
+              <li>Nenhuma</li>
+            <% end %>
+          </ul>
+        </section>
+      </aside>
+
+      <section class="content">
+        <%= render 'shared/flash_messages' if lookup_context.exists?('shared/_flash_messages') %>
+        <%= yield %>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">© <%= Time.current.year %> Agregador de notícias</div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        var btn = document.getElementById('refresh-all')
+        if(btn){
+          btn.addEventListener('click', function(e){
+            e.preventDefault();
+            fetch(btn.dataset.url, {
+              method: 'POST',
+              credentials: 'same-origin',
+              headers: {
+                'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').content,
+                'Accept': 'text/html'
+              }
+            })
+              .then(function(){ window.location.reload(); })
+              .catch(function(){ alert('Erro ao iniciar atualização'); })
+          })
+        }
+      })
+    </script>
+  </body>
+</html>

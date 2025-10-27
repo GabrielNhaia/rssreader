@@ -1,0 +1,26 @@
+<div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <h2>Feeds</h2>
+    <div class="meta">Itens não lidos: <strong><%= @unread_count %></strong></div>
+  </div>
+
+  <div class="feed-list">
+    <% @feeds.group_by(&:category).each do |category, feeds| %>
+      <section style="margin-top:1rem">
+        <h3 class="muted"><%= category.presence || 'Sem categoria' %></h3>
+        <% feeds.each do |feed| %>
+          <div class="feed-item">
+            <div>
+              <a href="<%= feed_path(feed) %>" class="item-title"><%= feed.name %></a>
+              <div class="small muted"><%= feed.url %></div>
+            </div>
+            <div class="meta" style="display:flex;gap:0.4rem">
+              <a href="<%= edit_feed_path(feed) %>" class="btn btn-ghost">Editar</a>
+              <%= button_to 'Excluir', feed_path(feed), method: :delete, class: 'btn btn-danger', form: { class: 'inline-form', data: { turbo_confirm: 'Tem certeza que deseja excluir este feed?' } } %>
+            </div>
+          </div>
+        <% end %>
+      </section>
+    <% end %>
+  </div>
+</div>

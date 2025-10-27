@@ -1,0 +1,20 @@
+<div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.75rem">
+    <div style="flex:1;min-width:0">
+      <a href="<%= feed_item_path(feed_item) %>" class="item-title"><%= feed_item.title %></a>
+      <div class="feed-content-preview"><%= truncate(strip_tags(feed_item.content || ''), length: 220) %></div>
+      <div class="muted small">
+        <span><%= feed_item.feed&.name %></span> ·
+        <span><%= feed_item.published_at %></span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:flex-end;flex-shrink:0">
+      <% if feed_item.read %>
+        <span class="muted small">Lido</span>
+      <% else %>
+        <%= button_to 'Marcar como lido', mark_as_read_feed_item_path(feed_item), method: :post, class: 'btn btn-ghost', form: { class: 'inline-form' } %>
+      <% end %>
+      <%= link_to 'Abrir fonte', feed_item.url, class: 'btn btn-ghost', target: '_blank', rel: 'noopener' %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="card">
+  <header style="display:flex;justify-content:space-between;align-items:center;gap:1rem">
+    <div>
+      <h2>Últimas notícias</h2>
+      <p class="muted small">Acompanhe os itens mais recentes dos seus feeds.</p>
+    </div>
+    <div style="display:flex;gap:0.5rem">
+      <%= link_to 'Todos', feed_items_path, class: 'btn btn-ghost' %>
+      <%= link_to 'Somente não lidos', feed_items_path(unread: true), class: 'btn btn-ghost' %>
+    </div>
+  </header>
+
+  <section style="margin-top:1.5rem">
+    <% if @feed_items.any? %>
+      <% @feed_items.each do |feed_item| %>
+        <%= render "feed_items/feed_item", feed_item: feed_item %>
+      <% end %>
+    <% else %>
+      <p class="muted">Nenhum item disponível.</p>
+    <% end %>
+  </section>
+</div>

@@ -1,0 +1,33 @@
+<div class="card">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <h2><%= @feed.name %></h2>
+    <div class="meta small" style="display:flex;gap:0.4rem">
+      <a href="<%= edit_feed_path(@feed) %>" class="btn btn-ghost">Editar</a>
+  <%= button_to 'Marcar todos como lidos', mark_all_as_read_feed_path(@feed), method: :post, class: 'btn btn-ghost', form: { class: 'inline-form' } %>
+  <%= button_to 'Excluir', feed_path(@feed), method: :delete, class: 'btn btn-danger', form: { class: 'inline-form', data: { turbo_confirm: 'Excluir este feed também removerá seus itens. Continuar?' } } %>
+    </div>
+  </div>
+
+  <div class="muted small" style="margin-top:0.5rem"><%= @feed.url %></div>
+
+  <div style="margin-top:1rem">
+    <% @feed_items.each do |item| %>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div style="flex:1">
+            <a href="<%= item.url %>" target="_blank" class="item-title"><%= item.title %></a>
+            <div class="feed-content-preview"><%= truncate(strip_tags(item.content || ''), length: 250) %></div>
+            <div class="muted small">Publicado em <%= item.published_at %></div>
+          </div>
+          <div class="meta">
+            <% unless item.read %>
+              <%= button_to 'Marcar como lido', mark_as_read_feed_item_path(item), method: :post, class: 'btn', form: { class: 'inline-form' } %>
+            <% else %>
+              <span class="muted small">Lido</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
