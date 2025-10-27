@@ -3,7 +3,7 @@ module FeedsHelper
     return '<p>Sem descrição disponível.</p>'.html_safe if content.blank?
 
     if content.match?(/<[^>]+>/)
-      sanitized = sanitize(content, 
+      sanitized = sanitize(content,
         tags: %w[p br a strong em b i ul ol li blockquote img h1 h2 h3 h4 h5 h6 pre code],
         attributes: %w[href src alt title class]
       )
