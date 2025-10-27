@@ -189,6 +189,8 @@ Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes
 
 Desenvolvido por **Gabriel** como projeto de portfólio.
 
+Salve para o mano deyvin pela ideia!
+
 ---
 
 ⭐ Se este projeto foi útil para você, considere dar uma estrela!
