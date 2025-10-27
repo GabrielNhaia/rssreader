@@ -43,7 +43,7 @@ Um agregador de feeds RSS/Atom moderno e minimalista, construído com Ruby on Ra
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/rssreader.git
+git clone https://github.com/GabrielNhaia/rssreader.git
 cd rssreader
 ```
 
