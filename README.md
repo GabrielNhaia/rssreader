@@ -187,7 +187,7 @@ Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **Gabriel** como projeto de portfólio.
+Desenvolvido por **@GabrielNhaia** como projeto de portfólio.
 
 Salve para o mano deyvin pela ideia!
 
