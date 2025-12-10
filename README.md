@@ -161,16 +161,6 @@ Execute a suíte de testes:
 bin/rails test
 ```
 
-## 📝 Roadmap
-
-- [ ] Autenticação de usuários
-- [ ] Suporte a múltiplos temas
-- [ ] Exportação de feeds (OPML)
-- [ ] Busca de conteúdo
-- [ ] Marcação com favoritos
-- [ ] PWA (Progressive Web App)
-- [ ] API REST
-
 ## 🤝 Contribuindo
 
 Contribuições são bem-vindas! Sinta-se à vontade para:
